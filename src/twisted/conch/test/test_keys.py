@@ -491,7 +491,7 @@ SUrCyZXsNh6VXwjs3gKQ
         passphrases.
         """
         key = keys.Key(self.rsaObj)
-        key_data = key.toString("openssh", passphrase="verschl\u00FCsselt".encode())
+        key_data = key.toString("openssh", passphrase="verschl\u00fcsselt".encode())
         self.assertEqual(
             keys.Key.fromString(key_data, passphrase="verschlu\u0308sselt"), key
         )
@@ -501,7 +501,7 @@ SUrCyZXsNh6VXwjs3gKQ
             keys.PassphraseNormalizationError,
             keys.Key.fromString,
             key_data,
-            passphrase="unassigned \uFFFF",
+            passphrase="unassigned \uffff",
         )
 
     def test_fromStringErrors(self):
@@ -1466,7 +1466,7 @@ xEm4DxjEoaIp8dW/JOzXQ2EF+WaSOgdYsw3Ac+rnnjnNptCdOEDGP6QBkt+oXj4P
         key = keys.Key(self.rsaObj)
         key_data = key.toString("openssh", passphrase="verschlu\u0308sselt")
         self.assertEqual(
-            keys.Key.fromString(key_data, passphrase="verschl\u00FCsselt".encode()),
+            keys.Key.fromString(key_data, passphrase="verschl\u00fcsselt".encode()),
             key,
         )
         # U+FFFF is a "noncharacter" and guaranteed to have General_Category
@@ -1475,7 +1475,7 @@ xEm4DxjEoaIp8dW/JOzXQ2EF+WaSOgdYsw3Ac+rnnjnNptCdOEDGP6QBkt+oXj4P
             keys.PassphraseNormalizationError,
             key.toString,
             "openssh",
-            passphrase="unassigned \uFFFF",
+            passphrase="unassigned \uffff",
         )
 
     def test_toStringErrors(self):

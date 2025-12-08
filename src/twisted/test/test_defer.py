@@ -69,7 +69,7 @@ from twisted.trial import unittest
 
 
 def ensuringDeferred(
-    f: Callable[..., Coroutine[Deferred[Any], Any, _T]]
+    f: Callable[..., Coroutine[Deferred[Any], Any, _T]],
 ) -> Callable[..., Deferred[_T]]:
     @functools.wraps(f)
     def wrapper(*args: object, **kwargs: object) -> Deferred[_T]:
@@ -165,15 +165,15 @@ class UtilTests(unittest.TestCase):
 
 class DeferredTests(unittest.SynchronousTestCase, ImmediateFailureMixin):
     def setUp(self) -> None:
-        self.callbackResults: Optional[
-            Tuple[Tuple[object, ...], Dict[str, object]]
-        ] = None
+        self.callbackResults: Optional[Tuple[Tuple[object, ...], Dict[str, object]]] = (
+            None
+        )
         self.callback2Results: Optional[
             Tuple[Tuple[object, ...], Dict[str, object]]
         ] = None
-        self.errbackResults: Optional[
-            Tuple[Tuple[Failure, ...], Dict[str, object]]
-        ] = None
+        self.errbackResults: Optional[Tuple[Tuple[Failure, ...], Dict[str, object]]] = (
+            None
+        )
 
         # Restore the debug flag to its original state when done.
         self.addCleanup(defer.setDebugging, defer.getDebugging())

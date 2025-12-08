@@ -526,27 +526,24 @@ class ClientEndpointTestCaseMixin(FakeTestBase):
     @abstractmethod
     def createClientEndpoint(
         self, reactor: IReactorTCP, clientFactory: IProtocolFactory, **connectArgs: Any
-    ) -> tuple[IStreamClientEndpoint, tuple[object, ...], IAddress]:
-        ...
+    ) -> tuple[IStreamClientEndpoint, tuple[object, ...], IAddress]: ...
 
     @abstractmethod
-    def connectArgs(self) -> dict[str, object]:
-        ...
+    def connectArgs(self) -> dict[str, object]: ...
 
     @abstractmethod
-    def expectedClients(self, reactor: MemoryReactor) -> Sequence[tuple[object, ...]]:
-        ...
+    def expectedClients(
+        self, reactor: MemoryReactor
+    ) -> Sequence[tuple[object, ...]]: ...
 
     @abstractmethod
     def assertConnectArgs(
         self, receivedArgs: tuple[object, ...], expectedArgs: tuple[object, ...]
-    ) -> None:
-        ...
+    ) -> None: ...
 
     @property
     @abstractmethod
-    def expectedAddress(self) -> str:
-        ...
+    def expectedAddress(self) -> str: ...
 
     def test_interface(self):
         """
@@ -701,8 +698,7 @@ class ServerEndpointTestCaseMixin(FakeTestBase):
     @abstractmethod
     def createServerEndpoint(
         self, reactor: IReactorTCP, serverFactory: IProtocolFactory, **connectArgs: Any
-    ) -> tuple[IStreamServerEndpoint, tuple[object, ...], IAddress]:
-        ...
+    ) -> tuple[IStreamServerEndpoint, tuple[object, ...], IAddress]: ...
 
     def test_interface(self):
         """

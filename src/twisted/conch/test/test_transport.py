@@ -474,7 +474,7 @@ class BaseSSHTransportTests(BaseSSHTransportBaseCase, TransportTestCase):
         skip = dependencySkip
 
     _A_KEXINIT_MESSAGE = (
-        b"\xAA" * 16
+        b"\xaa" * 16
         + common.NS(b"diffie-hellman-group14-sha1")
         + common.NS(b"ssh-rsa")
         + common.NS(b"aes256-ctr")
@@ -1748,7 +1748,7 @@ class ServerSSHTransportTests(ServerSSHTransportBaseCase, TransportTestCase):
         we raise an UnsupportedAlgorithm error.
         """
         kexmsg = (
-            b"\xAA" * 16
+            b"\xaa" * 16
             + common.NS(b"ecdh-sha2-nistp256")
             + common.NS(b"ssh-rsa")
             + common.NS(b"aes256-ctr")
@@ -2443,7 +2443,7 @@ class ClientSSHTransportTests(ClientSSHTransportBaseCase, TransportTestCase):
         Test that KEX_ECDH_REPLY disconnects if the signature is bad.
         """
         kexmsg = (
-            b"\xAA" * 16
+            b"\xaa" * 16
             + common.NS(b"ecdh-sha2-nistp256")
             + common.NS(b"ssh-rsa")
             + common.NS(b"aes256-ctr")
@@ -2632,7 +2632,7 @@ class ClientSSHTransportDHGroupExchangeBaseCase(ClientSSHTransportBaseCase):
         Test that KEX_ECDH_REPLY disconnects if the signature is bad.
         """
         kexmsg = (
-            b"\xAA" * 16
+            b"\xaa" * 16
             + common.NS(b"ecdh-sha2-nistp256")
             + common.NS(b"ssh-rsa")
             + common.NS(b"aes256-ctr")
@@ -2998,7 +2998,7 @@ class SSHCiphersTests(TestCase):
                 b"what do ya want for nothing?",
                 b"750c783e6ab0b503eaa86e310a5db738",
             ),
-            (b"\xAA" * 16, b"\xDD" * 50, b"56be34521d144c88dbb8c733f0e8b3f6"),
+            (b"\xaa" * 16, b"\xdd" * 50, b"56be34521d144c88dbb8c733f0e8b3f6"),
         ]
 
         for key, data, mac in vectors:

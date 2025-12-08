@@ -2341,7 +2341,7 @@ class ITLSTransport(ITCPTransport):
     def startTLS(
         contextFactory: Union[
             IOpenSSLClientConnectionCreator, IOpenSSLServerConnectionCreator
-        ]
+        ],
     ) -> None:
         """
         Initiate TLS negotiation.

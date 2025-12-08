@@ -162,7 +162,7 @@ if _docTestCase:
 
 
 def _iterateTests(
-    testSuiteOrCase: Union[pyunit.TestCase, pyunit.TestSuite]
+    testSuiteOrCase: Union[pyunit.TestCase, pyunit.TestSuite],
 ) -> Iterator[itrial.ITestCase]:
     """
     Iterate through all of the test cases in C{testSuiteOrCase}.

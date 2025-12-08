@@ -51,13 +51,11 @@ def MP(number: int) -> bytes:
 
 
 @overload
-def getMP(data: bytes) -> tuple[int, bytes]:
-    ...
+def getMP(data: bytes) -> tuple[int, bytes]: ...
 
 
 @overload
-def getMP(data: bytes, count: int) -> Sequence[int | bytes]:
-    ...
+def getMP(data: bytes, count: int) -> Sequence[int | bytes]: ...
 
 
 def getMP(data: bytes, count: int = 1) -> Sequence[int | bytes]:

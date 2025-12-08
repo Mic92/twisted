@@ -100,7 +100,7 @@ class Todo:
 def makeTodo(
     value: Union[
         str, Tuple[Union[Type[BaseException], Iterable[Type[BaseException]]], str]
-    ]
+    ],
 ) -> Todo:
     """
     Return a L{Todo} object built from C{value}.

@@ -731,7 +731,7 @@ def _passedSignature(signature, positional, keyword):
 
 
 def _mutuallyExclusiveArguments(
-    argumentPairs: Sequence[tuple[str, str]]
+    argumentPairs: Sequence[tuple[str, str]],
 ) -> Callable[[Callable[_P, _R]], Callable[_P, _R]]:
     """
     Decorator which causes its decoratee to raise a L{TypeError} if two of the

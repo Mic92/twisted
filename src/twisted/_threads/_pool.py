@@ -19,8 +19,7 @@ from ._threadworker import LockWorker, ThreadWorker
 
 
 class _ThreadFactory(Protocol):
-    def __call__(self, *, target: Callable[..., object]) -> Thread:
-        ...
+    def __call__(self, *, target: Callable[..., object]) -> Thread: ...
 
 
 def pool(

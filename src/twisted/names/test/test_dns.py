@@ -78,7 +78,7 @@ class DomainStringTests(unittest.SynchronousTestCase):
         """
         L{dns.domainString} encodes Unicode using IDNA.
         """
-        self.assertEqual(b"xn--fwg.test", dns.domainString("\u203D.test"))
+        self.assertEqual(b"xn--fwg.test", dns.domainString("\u203d.test"))
 
     def test_nonsense(self):
         """
@@ -697,7 +697,7 @@ class RoundtripDNSTests(unittest.TestCase):
             b"\x08hmac-md5\x07sig-alg\x03reg\x03int\x00"
             b"\x00\x00\x5a\x55\x71\x2f\x00\x05\x00\x10"
             + mac
-            + b"\x00\x2A\x00\x00\x00\x00"
+            + b"\x00\x2a\x00\x00\x00\x00"
         )
         self.assertEncodedFormat(rdata, rr)
 
@@ -711,7 +711,7 @@ class RoundtripDNSTests(unittest.TestCase):
         )
         self._recordRoundtripTest(rr)
         rdata = (
-            b"\x0Bhmac-sha256\x00"
+            b"\x0bhmac-sha256\x00"
             b"\x00\x01\x0c\xec\x93\x27\x00\x05\x00\x10"
             + mac
             + b"\xff\xff\x00\x12\x00\x06"

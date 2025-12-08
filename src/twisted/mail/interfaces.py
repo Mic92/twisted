@@ -143,12 +143,10 @@ class IMailboxPOP3(Interface):
     """
 
     @overload
-    def listMessages() -> list[int]:
-        ...
+    def listMessages() -> list[int]: ...
 
     @overload
-    def listMessages(i: int) -> int:
-        ...
+    def listMessages(i: int) -> int: ...
 
     def listMessages(i: int | None = None) -> int | list[int]:
         """

@@ -521,12 +521,10 @@ class MaildirMailbox(pop3.Mailbox):
         self.list: list[int | bytes] = [el[1] for el in computing]
 
     @overload
-    def listMessages(self) -> list[int]:
-        ...
+    def listMessages(self) -> list[int]: ...
 
     @overload
-    def listMessages(self, i: int) -> int:
-        ...
+    def listMessages(self, i: int) -> int: ...
 
     def listMessages(self, i: int | None = None) -> int | list[int]:
         """

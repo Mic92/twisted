@@ -539,13 +539,13 @@ class SerializerTests(unittest.TestCase):
 
     def testRawXMLWithUnicodeSerialization(self):
         e = domish.Element((None, "foo"))
-        e.addRawXml("<degree>\u00B0</degree>")
-        self.assertEqual(e.toXml(), "<foo><degree>\u00B0</degree></foo>")
+        e.addRawXml("<degree>\u00b0</degree>")
+        self.assertEqual(e.toXml(), "<foo><degree>\u00b0</degree></foo>")
 
     def testUnicodeSerialization(self):
         e = domish.Element((None, "foo"))
         e["test"] = "my value\u0221e"
-        e.addContent("A degree symbol...\u00B0")
+        e.addContent("A degree symbol...\u00b0")
         self.assertEqual(
-            e.toXml(), "<foo test='my value\u0221e'" ">A degree symbol...\u00B0</foo>"
+            e.toXml(), "<foo test='my value\u0221e'" ">A degree symbol...\u00b0</foo>"
         )

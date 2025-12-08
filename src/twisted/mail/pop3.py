@@ -1332,12 +1332,10 @@ class Mailbox:
     """
 
     @overload
-    def listMessages(self) -> list[int]:
-        ...
+    def listMessages(self) -> list[int]: ...
 
     @overload
-    def listMessages(self, i: int) -> int:
-        ...
+    def listMessages(self, i: int) -> int: ...
 
     def listMessages(self, i: int | None = None) -> int | list[int]:
         """

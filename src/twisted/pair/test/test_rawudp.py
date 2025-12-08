@@ -43,10 +43,10 @@ class RawUDPTests(unittest.TestCase):
         proto.addProto(0xF00F, p1)
 
         proto.datagramReceived(
-            b"\x43\xA2"  # source
+            b"\x43\xa2"  # source
             b"\xf0\x0f"  # dest
             b"\x00\x06"  # len
-            b"\xDE\xAD"  # check
+            b"\xde\xad"  # check
             b"foobar",
             partial=0,
             dest=b"dummy",
@@ -77,10 +77,10 @@ class RawUDPTests(unittest.TestCase):
         )
         proto.addProto(0xF00F, p1)
         proto.datagramReceived(
-            b"\x43\xA2"  # source
+            b"\x43\xa2"  # source
             b"\xf0\x0f"  # dest
             b"\x00\x06"  # len
-            b"\xDE\xAD"  # check
+            b"\xde\xad"  # check
             b"foobar",
             partial=0,
             dest=b"dummy",
@@ -97,10 +97,10 @@ class RawUDPTests(unittest.TestCase):
             ttl=b"dummy",
         )
         proto.datagramReceived(
-            b"\x33\xFE"  # source
+            b"\x33\xfe"  # source
             b"\xf0\x0f"  # dest
             b"\x00\x05"  # len
-            b"\xDE\xAD"  # check
+            b"\xde\xad"  # check
             b"quux",
             partial=0,
             dest=b"dummy",
@@ -139,10 +139,10 @@ class RawUDPTests(unittest.TestCase):
         proto.addProto(0xF00F, p2)
 
         proto.datagramReceived(
-            b"\x43\xA2"  # source
+            b"\x43\xa2"  # source
             b"\xf0\x0f"  # dest
             b"\x00\x06"  # len
-            b"\xDE\xAD"  # check
+            b"\xde\xad"  # check
             b"foobar",
             partial=0,
             dest=b"dummy",
@@ -172,10 +172,10 @@ class RawUDPTests(unittest.TestCase):
         proto.addProto(1, p1)
 
         proto.datagramReceived(
-            b"\x43\xA2"  # source
+            b"\x43\xa2"  # source
             b"\xf0\x0f"  # dest
             b"\x00\x06"  # len
-            b"\xDE\xAD"  # check
+            b"\xde\xad"  # check
             b"foobar",
             partial=0,
             dest=b"dummy",
@@ -211,10 +211,10 @@ class RawUDPTests(unittest.TestCase):
         proto.addProto(0xB050, p2)
 
         proto.datagramReceived(
-            b"\xA4\x01"  # source
-            b"\xB0\x50"  # dest
+            b"\xa4\x01"  # source
+            b"\xb0\x50"  # dest
             b"\x00\x05"  # len
-            b"\xDE\xAD"  # check
+            b"\xde\xad"  # check
             b"quux",
             partial=0,
             dest=b"dummy",
@@ -231,10 +231,10 @@ class RawUDPTests(unittest.TestCase):
             ttl=b"dummy",
         )
         proto.datagramReceived(
-            b"\x43\xA2"  # source
+            b"\x43\xa2"  # source
             b"\xf0\x0f"  # dest
             b"\x00\x06"  # len
-            b"\xDE\xAD"  # check
+            b"\xde\xad"  # check
             b"foobar",
             partial=0,
             dest=b"dummy",
@@ -251,10 +251,10 @@ class RawUDPTests(unittest.TestCase):
             ttl=b"dummy",
         )
         proto.datagramReceived(
-            b"\x33\xFE"  # source
+            b"\x33\xfe"  # source
             b"\xf0\x0f"  # dest
             b"\x00\x05"  # len
-            b"\xDE\xAD"  # check
+            b"\xde\xad"  # check
             b"quux",
             partial=0,
             dest=b"dummy",
@@ -271,10 +271,10 @@ class RawUDPTests(unittest.TestCase):
             ttl=b"dummy",
         )
         proto.datagramReceived(
-            b"\xA3\x02"  # source
-            b"\xB0\x50"  # dest
+            b"\xa3\x02"  # source
+            b"\xb0\x50"  # dest
             b"\x00\x06"  # len
-            b"\xDE\xAD"  # check
+            b"\xde\xad"  # check
             b"foobar",
             partial=0,
             dest=b"dummy",

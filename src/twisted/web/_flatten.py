@@ -107,7 +107,7 @@ def attributeEscapingDoneOutside(data: Union[bytes, str]) -> bytes:
 
 
 def writeWithAttributeEscaping(
-    write: Callable[[bytes], object]
+    write: Callable[[bytes], object],
 ) -> Callable[[bytes], None]:
     """
     Decorate a C{write} callable so that all output written is properly quoted
