@@ -5,7 +5,9 @@
 Tests for L{twisted.internet.epollreactor}.
 """
 
+import errno
 from unittest import skipIf
+from unittest.mock import Mock, patch
 
 from twisted.internet.error import ConnectionDone
 from twisted.internet.posixbase import _ContinuousPolling
@@ -228,3 +230,46 @@ class ContinuousPollingTests(TestCase):
         writer = object()
         poller.addWriter(writer)
         self.assertIn(writer, poller.getWriters())
+
+
+@skipIf(not epollreactor, "epoll not supported in this environment.")
+class EPollReactorTests(TestCase):
+    """
+    Tests for L{epollreactor.EPollReactor}.
+    """
+
+    def test_addReaderENOENT(self):
+        """
+        When L{EPollReactor.addReader} encounters an ENOENT error from
+        epoll_ctl (indicating the file descriptor was closed before it
+        could be registered), it cleans up tracking state and schedules
+        C{connectionLost} to be called on the descriptor.
+        """
+        reactor = epollreactor.EPollReactor()
+
+        descriptor = Mock()
+        descriptor.fileno.return_value = 42
+
+        # Simulate the fd being already registered for writing
+        reactor._writes.add(42)
+        reactor._selectables[42] = descriptor
+
+        # Make the poller raise ENOENT when trying to modify
+        enoent_error = OSError(errno.ENOENT, "No such file or directory")
+        with patch.object(reactor._poller, "modify", side_effect=enoent_error):
+            reactor.addReader(descriptor)
+
+        # All tracking state should be cleaned up
+        self.assertNotIn(42, reactor._reads)
+        self.assertNotIn(42, reactor._writes)
+        self.assertNotIn(42, reactor._selectables)
+
+        # connectionLost should be scheduled
+        calls = reactor.getDelayedCalls()
+        self.assertEqual(len(calls), 1)
+
+        # Run the scheduled call
+        calls[0].func(*calls[0].args, **calls[0].kw)
+
+        # connectionLost should have been called
+        descriptor.connectionLost.assert_called_once()

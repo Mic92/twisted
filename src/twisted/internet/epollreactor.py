@@ -109,6 +109,33 @@ class EPollReactor(posixbase.PosixReactorBase, posixbase._PollLikeMixin):
             primary.add(fd)
             selectables[fd] = xer
 
+    def _handleENOENT(self, selectable):
+        """
+        Handle ENOENT error from epoll_ctl.
+
+        This can happen when a connection is accepted but reset by the peer
+        before we finish registering it with epoll. Clean up tracking state
+        and schedule connectionLost to notify the protocol.
+
+        @param selectable: The FileDescriptor that could not be registered.
+        """
+        fd = selectable.fileno()
+        # Clean up any stale tracking state for this fd
+        self._reads.discard(fd)
+        self._writes.discard(fd)
+        self._selectables.pop(fd, None)
+
+        # Schedule connectionLost to properly clean up the connection
+        from twisted.internet import main
+
+        self.callLater(
+            0,
+            log.callWithLogger,
+            selectable,
+            selectable.connectionLost,
+            main.CONNECTION_LOST,
+        )
+
     def addReader(self, reader):
         """
         Add a FileDescriptor for notification of data available to read.
@@ -123,6 +150,8 @@ class EPollReactor(posixbase.PosixReactorBase, posixbase._PollLikeMixin):
                 # e.g. filesystem files, so for those we just poll
                 # continuously:
                 self._continuousPolling.addReader(reader)
+            elif e.errno == errno.ENOENT:
+                self._handleENOENT(reader)
             else:
                 raise
 
@@ -140,6 +169,8 @@ class EPollReactor(posixbase.PosixReactorBase, posixbase._PollLikeMixin):
                 # e.g. filesystem files, so for those we just poll
                 # continuously:
                 self._continuousPolling.addWriter(writer)
+            elif e.errno == errno.ENOENT:
+                self._handleENOENT(writer)
             else:
                 raise
 
